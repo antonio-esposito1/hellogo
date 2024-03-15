@@ -4,14 +4,17 @@
 // See page 1.
 
 // Helloworld is our first Go program.
-//!+
+// !+
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-        fmt.Println("Hello, 世界")
-        
+	fmt.Println("Hello, 世界")
+
 	var snmpConfigured bool = true
 	var vlanID int = 1024
 	if !snmpConfigured {
@@ -67,6 +70,59 @@ func main() {
 		preaccocatedVlanSlice = append(preaccocatedVlanSlice, i)
 	}
 	fmt.Printf("preallocatedVlanSlice cap is %d, len is %d\n", cap(preaccocatedVlanSlice), len(preaccocatedVlanSlice))
-}
 
+	var vlanSliceIter = []int{11, 22, 33, 44, 55}
+	for i := 0; i < len(vlanSliceIter); i++ {
+		fmt.Printf("vlanSliceIter index %d has value %d \n", i, vlanSliceIter[i])
+	}
+
+	for i := range vlanSliceIter {
+		fmt.Printf("vlanSliceIter index %d has value %d \n", i, vlanSliceIter[i])
+	}
+
+	for i, val := range vlanSliceIter {
+		fmt.Printf("vlanSliceIter index %d has value %d \n", i, val)
+	}
+
+	//when searching an array or slice for particulat value, you can use
+	//the break statement to stop iterationg once you've found it
+
+	toFind := 33
+	for i, val := range vlanSliceIter {
+		if val == toFind {
+			fmt.Printf("Found! index is %d\n", i)
+			break
+		}
+	}
+
+	//var MyMap = make(map[string]int)
+	//var MyMap2 = map[string]int
+	//MyMap3 := map[string]int{}
+
+	vlanMap := map[string]int{
+		"VLAN_100": 100,
+		"VLAN_200": 200,
+		"VLAN_300": 300,
+	}
+
+	vlan5 := vlanMap["VLAN_300"]
+	fmt.Printf("vlan is %d\n", vlan5)
+
+	if val, found := vlanMap["VLAN_300"]; found {
+		fmt.Printf("Found vlan %d\n", val)
+	}
+
+	for key, value := range vlanMap {
+		fmt.Printf("%s has a value of %d\n", key, value)
+	}
+
+        func totalIPv4Addresses(prefixLen int) int {
+                x := 32 - prefixLen
+
+                addCount := math.Pow(2.0, float64(x))
+
+                return int(addCount)
+        }
+
+        totalIPv4Addresses(20)
 }
